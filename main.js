@@ -4,7 +4,6 @@ var url = require('url');
 var app = http.createServer(function(request, response){
     var _url = request.url;
     var queryData = url.parse(_url,true).query;
-    console.log(queryData);
     if(_url == '/'){
         _url = '/index.html';
     }
@@ -12,7 +11,6 @@ var app = http.createServer(function(request, response){
         return response.writeHead(404);
     }
     response.writeHead(200);
-
 
 
     // readfilesync가 파일을 읽어오는 역할을 수행한다.
