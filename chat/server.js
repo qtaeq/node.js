@@ -19,6 +19,7 @@ io.on('connection', function(socket) {
     console.log('msg :' + msg);
     io.emit('broadcast message', msg);
   });
+
 });
 
 
