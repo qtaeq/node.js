@@ -5,6 +5,7 @@ var app = http.createServer(function(request, response){
     var _url = request.url;
     var queryData = url.parse(_url,true).query;
     console.log(queryData);
+
     if(_url == '/'){
         _url = '/index.html';
     }
