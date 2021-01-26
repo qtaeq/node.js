@@ -17,9 +17,11 @@
   },
   "homepage": "https://github.com/qtaeq/node.js#readme",
   "dependencies": {
+    "debug": "^4.3.1",
     "ejs": "^3.1.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "pm2": "^4.5.1",
     "socket.io": "^3.1.0"
   },
   "devDependencies": {},
