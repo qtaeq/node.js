@@ -2,9 +2,10 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring');
+var path = require('path');
 
 var template = require('./lib/template.js');
-var crud = require('./lib/crud.js');
+
 
 var app = http.createServer(function(request, response){
     var _url = request.url;
@@ -14,10 +15,20 @@ var app = http.createServer(function(request, response){
 
     if(pathName == '/'){
         if(queryData.id == undefined){
-            
+            fs.readdir('./data', function(error, filelist){
+                var title = 'Welcome';
+                var description = 'Hello, Node.js';
+                var list = template.List(filelist);
+                var temp = template.HTML(title, list,
+                    `<h2>${title}</h2>${description}`,
+                    `<a href="/create">create</a>`);
+                response.writeHead(200);
+                response.end(temp);
+            });
         } else{
             fs.readdir('./data',function(error, filelist){
-                fs.readFile(`data/${queryData.id}`, `utf8`, function(err, description){
+                var fileteredId = path.parse(queryData.id).base;// 입력정보에 대한 보안
+                fs.readFile(`data/${fileteredId}`, `utf8`, function(err, description){
                     var title = queryData.id;
                     var list = template.List(filelist);
                     var temp = template.HTML(title, list,
@@ -69,7 +80,8 @@ var app = http.createServer(function(request, response){
 
     } else if(pathName == '/update'){
         fs.readdir('./data',function(error, filelist){
-            fs.readFile(`data/${queryData.id}`, `utf8`, function(err, text){
+            var fileteredId = path.parse(queryData.id).base; // 입력정보에 대한 보안
+            fs.readFile(`data/${fileteredId}`, `utf8`, function(err, text){
                 var title = `Update ${queryData.id}`;
                 var list = template.List(filelist);
                 var description = template.Form("update", queryData.id, text);
@@ -104,7 +116,8 @@ var app = http.createServer(function(request, response){
         request.on('end', function(){
             var post = qs.parse(body);
             var id = post.id;
-            fs.unlink(`data/${id}`, function(err){
+            var fileteredId = path.parse(id).base;  // 입력정보에 대한 보안
+            fs.unlink(`data/${fileteredId}`, function(err){
                 response.writeHead(302, {Location : `/`});
                 response.end();
             });

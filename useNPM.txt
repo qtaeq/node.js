@@ -1,2 +1,15 @@
 #1 pm2 - 프로세스 관리
-#2 
+#   - 보안오류 발생시 > ExecutionPolicy를 통해 권한 확인
+      > Set-ExecutionPolicy -Scopre CurrentUser Unrestricted 설정
+#   > pm2 start [file] --watch : 파일 변경되면 자동 재시작
+#   >
+
+
+
+# 내용
+# 입력정보에 대한 보안 : page view 했을 때 경로를 바꿔서
+                        접근하면 안되는 페이지에 접근 못하게 변경
+var fileteredId = path.parse(queryData.id).base;// 입력정보에 대한 보안
+
+# 출력정보에 대한 보안 : page create 할 때 본문에 script를 넣는 공격
+# 해결 : html 인코딩을 통한 <, > 변경
