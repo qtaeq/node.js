@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%- include('../partials/head') %>
+
+    <%
+      function getFormatDate(date){
+          var year = date.getFullYear();              //yyyy
+          var month = (1 + date.getMonth());          //M
+          month = month >= 10 ? month : '0' + month;  //month 두자리로 저장
+          var day = date.getDate();                   //d
+          day = day >= 10 ? day : '0' + day;          //day 두자리로 저장
+          return  year + '년 ' + month + '월 ' + day + '일';       //'-' 추가하여 yyyy-mm-dd 형태 생성 가능
+      }
+    %>
+
+  </head>
+  <body>
+    <%- include('../partials/nav') %>
+
+    <div class="container mb-3">
+
+      <h2 class="mb-3">Board</h2>
+
+      <table class="board-table table table-sm border-bottom">
+
+        <thead class="thead-light">
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col" class="date">Date</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% if(posts == null || posts.length == 0){ %>
+            <tr>
+              <td colspan=2> There is no data to show :( </td>
+            </tr>
+          <% } %>
+          <% posts.forEach(function(post) { %>
+            <tr>
+              <td>
+                <a href="/board/<%= post._id %>"><div class="ellipsis"><%= post.title %></div></a>
+              </td>
+              <td class="date"> <%=getFormatDate(post.date)%> </td>
+            </tr>
+          <% }) %>
+        </tbody>
+
+      </table>
+
+      <div>
+        <a class="btn btn-primary" href="/board/create">New</a>
+      </div>
+
+    </div>
+  </body>
+</html>

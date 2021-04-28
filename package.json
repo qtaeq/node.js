@@ -2,22 +2,18 @@
   "name": "node",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/qtaeq/node.js.git"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/qtaeq/node.js/issues"
-  },
-  "homepage": "https://github.com/qtaeq/node.js#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "maria": "0.0.1-a",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.7"
   }
 }
